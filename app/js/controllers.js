@@ -2,10 +2,11 @@
 
 /* Controllers */
 
-    function IssueFormCtrl($scope) {
+  function IssueFormCtrl($scope,JiraSession) {
+    $scope.session = JiraSession.query();
+
     var master = {
-	reporter:"Aaron",
-	summary:"it does not work",
+	
     };
      
    
@@ -15,6 +16,7 @@
      
     $scope.save = function() {
     	master = $scope.form;
+      $scope.jiraPost = createJiraIssue($scope.form);
     	$scope.cancel();
     };
      
@@ -30,6 +32,34 @@
     $scope.cancel();
     }
 
+
+function createJiraIssue(master){
+  var jiraPost =  {
+      "fields":{
+          "project":{"key":"DATA"},
+          "summary": master.summary,
+          "description" : master.description,
+          "priority":{"name":master.priority},
+          "customfield_10700": master.population,
+          "customfield_10503": master.acceptance
+      }
+  };
+  return jiraPost;
+/*
+{
+  "fields":{
+        "project":{ "key":"DATA"},
+        "summary": "This is a test",
+        "description":"this is the description of the test",
+        "issuetype": {"name":"Production Issue"},
+        "customfield_10700": "This affects the entire Population.",
+        "customfield_10503": "Acceptance Criteria is that it works."
+        }
+}
+*/
+
+
+}
 
 function SessionCtrl($scope, JiraSession) {
   $scope.session = JiraSession.query();

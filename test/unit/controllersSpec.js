@@ -10,13 +10,10 @@ describe('IssueApp controllers', function() {
       }
     });
   });
-
-
-  beforeEach(module('JiraServices'));
-
+ 
 
   describe('IssueListCtrl', function(){
-    var scope, ctrl, $httpBackend;
+    var scope, ctrl, $httpBackend, JiraSession;
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
@@ -38,4 +35,5 @@ describe('IssueApp controllers', function() {
 
 
   });
+
 });

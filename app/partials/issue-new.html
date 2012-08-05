@@ -1,9 +1,15 @@
  <div ng-controller="IssueFormCtrl">
       <form name="prodForm">
-        <label>Reporter:</label><br/>
-          <input type="text" ng-model="form.reporter" required/> <br/><br/>
-        <label>Description:</label> <br/>
-          <textarea ng-model="form.summary" required></textarea><br/>
+        <label>Reporter:</label>
+          <span class="reporter" ng-model="form.reporter">{{session.name}}</span> <br/><br/>
+      <label>Summary:</label>
+          <input ng-model="form.summary" required /><br/>
+
+      <label>Population Affected:</label>
+          <input ng-model="form.population" required /><br/>
+
+        <label>Description:</label>
+          <textarea ng-model="form.description" required></textarea><br/>
         <label>Priority</label><br/>
           <select ng-model="form.priority" required>
             <option value="Low">Low</option>
@@ -11,11 +17,19 @@
             <option value="High">High</option>
           </select>
 
+        <label>Acceptance Critera</label>
+        <textarea ng-model="form.acceptance" required></textarea>
+
     <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
     <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
     </form>
     <hr/>
-    Debug View:
-    <pre>form={{form}}</pre>
-  </div>
+      <div class="row-fluid">
+        <div class="span5"> Form details
+          <pre>{{form}}</pre>
+        </div>
+        <div class="span5"> Post to JIRA
+          <pre>{{jiraPost}}</pre>
+        </div>
+      </div>
    

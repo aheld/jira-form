@@ -18,7 +18,15 @@
   <A ng-controller="SessionCtrl"  href="#/issues"> {{session.name}}'s' Issues</a> | 
   <A href="#/issues/new">New Issue</a>
 
-
-   <div ng-view></div>
-    </body>
-    </html>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10">
+      <div ng-view></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
