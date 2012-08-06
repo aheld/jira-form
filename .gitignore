@@ -7,3 +7,4 @@ build.xml
 .settings
 .idea/*
 app/jira/*
+app/js/config.js
