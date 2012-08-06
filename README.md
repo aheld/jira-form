@@ -13,8 +13,9 @@ the core services to connect to JIRA should all live under services, right now w
 
 Before use you must edit services.js to point to your jira instance
 
-  update app/js/services.js: 
+  rename app/js/config_sample.js to config.js: and enter your jira url 
   'jiraUrl': 'https://JIRA_DOMAIN/'
+  note: config.js is under .gitignore and should not get checked in
 
 ### login to jira 
 authentication is not supported yet, we assume you are logged in

@@ -1,14 +1,6 @@
 'use strict';
 
-/* Services */
-
-angular.module('configServices', []).factory('ConfigService', function(){
-	return {
-		'jiraUrl': 'https://JIRA_DOMAIN/',
-	}
-})
- 
-
+/* Services - be sure to include config.js*/
 
 angular.module('jiraServices', ['ngResource','configServices']).
    factory('JiraIssue', function($resource,ConfigService){
