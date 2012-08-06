@@ -25,5 +25,6 @@ Start a webserver in the checkout directory or move the files under an existing 
 
     python -m SimpleHTTPServer
 
+#### known issues:
 
-
+e2e jasmine tests are assumed to be running as me, they probably won't work for you..

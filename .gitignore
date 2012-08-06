@@ -6,4 +6,4 @@ build.xml
 .project
 .settings
 .idea/*
-jira/*
+app/jira/*
