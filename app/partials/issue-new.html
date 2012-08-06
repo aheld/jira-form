@@ -1,0 +1,21 @@
+ <div ng-controller="IssueFormCtrl">
+      <form name="prodForm">
+        <label>Reporter:</label><br/>
+          <input type="text" ng-model="form.reporter" required/> <br/><br/>
+        <label>Description:</label> <br/>
+          <textarea ng-model="form.summary" required></textarea><br/>
+        <label>Priority</label><br/>
+          <select ng-model="form.priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+
+    <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
+    <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
+    </form>
+    <hr/>
+    Debug View:
+    <pre>form={{form}}</pre>
+  </div>
+   

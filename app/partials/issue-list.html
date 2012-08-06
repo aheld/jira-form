@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10">
+      <!--Body content-->
+      <h3>Issues reported by {{session.name}}</h3>
+      <input id="query" type="text" ng-model="query"/>
+      <ul class="issues"> 
+        <li ng-repeat="issue in issues.issues | filter:summaryFilter" class="issue">
+          <a class="preview" href="#/issues/{{issue.key}}"/>preview</a><img ng-src="{{issue.fields.status.iconUrl}}" />
+          <A href="mailto:{{issue.fields.assignee.emailAddress}}?subject={{issue.key}}"><img ng-src="{{issue.fields.assignee.avatarUrls.16x16}}" /></A>
+          <a href="https://energyplus.atlassian.net/browse/{{issue.key}}" class="key">{{issue.key}}</a>{{issue.fields.status.name}} 
+          <p>{{issue.fields.summary}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

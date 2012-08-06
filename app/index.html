@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" ng-app="issueapp">
+<head>
+  <meta charset="utf-8">
+  <title>We have issues</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.min.js"></script>
+  <script src="js/app.js"></script>  
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  
+  
+</head>
+<body>
+  <A ng-controller="SessionCtrl"  href="#/issues"> {{session.name}}'s' Issues</a> | 
+  <A href="#/issues/new">New Issue</a>
+
+
+   <div ng-view></div>
+    </body>
+    </html>
