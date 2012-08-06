@@ -10,15 +10,24 @@
   <script src="js/app.js"></script>  
   <script src="js/config.js"></script>
   <script src="js/services.js"></script>
+  <!--script src="js/filters.js"></script><!---->
   <script src="js/controllers.js"></script>
   
   
 </head>
-<body>
-  <A ng-controller="SessionCtrl"  href="#/issues"> {{session.name}}'s' Issues</a> | 
-  <A href="#/issues/new">New Issue</a>
-
+<body ng-controller="SessionCtrl">
 <div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span2">
+      <!--Top Sidebar content-->
+    </div>
+      <div id="navrow" class="span10">
+  <A  href="#/issues/list/"> {{session.name}}'s' Issues</a> | 
+  <A href="#/issues/list/prodissues">All Open Issues</a> |
+  <A href="#/issues/new">New Issue</a>
+      </div>
+    </div>
+
   <div class="row-fluid">
     <div class="span2">
       <!--Sidebar content-->

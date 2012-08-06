@@ -1,9 +1,9 @@
 'use strict';
 
 /* Filters */
-
-angular.module('phonecatFilters', []).filter('checkmark', function() {
-  return function(input) {
-    return input ? '\u2713' : '\u2718';
-  };
+angular.module('issueFilters', []).filter('summaryFilter', function() {
+  return function(elem, $scope) {
+          if(!$scope.query) return true;
+        return angular.lowercase(elem.fields.summary).indexOf( angular.lowercase($scope.query)) >= 0; 
+    };
 });

@@ -2,26 +2,25 @@
 
 /* Services - be sure to include config.js*/
 
-angular.module('jiraServices', ['ngResource','configServices']).
-   factory('JiraIssue', function($resource,ConfigService){
-  //returne $resource('jira/my-issues.json', {}, {
-  return $resource(ConfigService.jiraUrl + 'rest/api/2/search?jql=reporter%20=%20currentUser%28%29&jsonp-callback=JSON_CALLBACK', {}, {
-    myissues: {method:'JSONP', isArray:false},
+angular.module('cache',[]).
+    factory('HttpCache',function($cacheFactory)
+    {
+           return $cacheFactory("jiracache");
+    });
+
+angular.module('jiraIssue', ['ngResource','configServices']).
+   factory('Issue', function($resource,ConfigService){
+    return $resource(ConfigService.jiraUrl + 'rest/api/2/:type/:issueID', {"issueID":"",type:"search","jsonp-callback":'JSON_CALLBACK',"fields":"key,status,summary,assignee","maxResults":"300"},
+     {
+      myissues: {method:'JSONP', isArray:false, params:{jql:"reporter=currentUser() AND resolution = Unresolved"}},
+      prodissues: {method:'JSONP', isArray:false, params:{jql:'issuetype = "Production Issue" AND status != Canceled AND status != closed AND status != Staged AND status != "Resolved" and status !="QA Passed" AND status != "Deployed to Production" AND status != "Production Testing" and status != "Ready for Release" AND status != Complete AND status !="Acceptance Testing" AND status !="Pending PVT"  ORDER BY priority DESC, key DESC'}},
+      issue:{method:'JSONP', isArray:false, params:{"type":"issue"}}
+    });
   });
-});
-
-angular.module('issueServices', ['jiraServices','ngResource']).
-   factory('Issue', function(JiraIssue,$resource){
-  return {
-    query: JiraIssue.myissues,
-
-  }
-});
 
 angular.module('jiraSession',['ngResource','configServices']).
 	factory('JiraSession', function($resource,ConfigService){
 		return    $resource(ConfigService.jiraUrl + 'rest/auth/1/session?jsonp-callback=JSON_CALLBACK',{},{
 			query:{method:'JSONP', isArray:false}
-		})
-	});
-
+		});
+  });

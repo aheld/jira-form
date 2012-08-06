@@ -2,24 +2,18 @@
 
 /* Controllers */
 
-  function IssueFormCtrl($scope,JiraSession) {
-    $scope.session = JiraSession.query();
+  function IssueFormCtrl($scope) {
 
-    var master = {
-	
-    };
-     
-   
+    var master = {};
     $scope.cancel = function() {
-   	 $scope.form = angular.copy(master);
+      $scope.form = angular.copy(master);
     };
      
     $scope.save = function() {
-    	master = $scope.form;
+      master = $scope.form;
       $scope.jiraPost = createJiraIssue($scope.form);
-    	$scope.cancel();
+      $scope.cancel();
     };
-     
      
     $scope.isCancelDisabled = function() {
   	  return angular.equals(master, $scope.form);
@@ -65,29 +59,26 @@ function SessionCtrl($scope, JiraSession) {
   $scope.session = JiraSession.query();
 }
 
-function IssueListCtrl($scope, Issue,JiraSession) {
-  $scope.issues = Issue.query();
-  $scope.session = JiraSession.query();
-
-
-  $scope.summaryFilter = function(elem) { 
-        if(!$scope.query) return true;
-        console.log(elem);
-        return angular.lowercase(elem.fields.summary).indexOf( angular.lowercase($scope.query)) >= 0; 
-    };     
-  //$scope.orderPro = 'age';
+function IssueListCtrl($scope,Issue,$routeParams,HttpCache) {
+  $scope.jiraQuery = $routeParams.query;
+  var data = {};
+  if ($scope.jiraQuery == 'prodissues'){
+        data = HttpCache.get("prodissues");
+        if (!data) {
+          data = Issue.prodissues();
+          HttpCache.put("prodissues", data);
+          }
+        $scope.issues = data;
+  } else {
+        data = HttpCache.get("myissues");
+        if (!data) {
+          data = Issue.myissues();
+          HttpCache.put("myissues", data);
+          }
+        $scope.issues = data;
+  }
 }
 
-//PhoneListCtrl.$inject = ['$scope', 'Phone'];
-
-
-
-function IssueDetailCtrl($scope, $routeParams, $http, ConfigService ) {
-    $http.jsonp(ConfigService.jiraUrl + 'rest/api/2/issue/' + $routeParams.issueID + '?jsonp-callback=JSON_CALLBACK').
-      success(function(data) {
-        $scope.issue = data;
-     });
- 
+function IssueDetailCtrl($scope, $routeParams, $http, ConfigService,Issue ) {
+    $scope.issue = Issue.issue({issueID:$routeParams.issueID});
 }
-
-//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];

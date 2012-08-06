@@ -1,7 +1,13 @@
 
       <!--Body content-->
       <h3>Issues reported by {{session.name}}</h3>
-      <input id="query" type="text" ng-model="query"/>
+        <div class="row-fluid">
+          <div class="span5">
+            <label for="query">Filter</label> <input id="query" type="text" ng-model="query"/>
+          </div>
+          <div class="span5">
+          </div>
+        </div>
       <ul class="issues"> 
         <li ng-repeat="issue in issues.issues | filter:summaryFilter" class="issue">
           <a class="preview" href="#/issues/{{issue.key}}"/>preview</a><img ng-src="{{issue.fields.status.iconUrl}}" />
