@@ -5,23 +5,27 @@
         <span class="reporter" ng-model="form.reporter">{{session.name}}</span>
         <br/><br/>
       <label>Summary:</label>
-      <input ng-model="form.summary" required placeholder="Trouble saving account 123123" class="span12"/><br/>
+      <input ng-model="form.summary" required placeholder="Trouble saving account 123123" class="span12"/>
 
       <label>Population Affected:</label>
-      <input ng-model="form.population" required class="span12" placeholder="All of operations" /><br/>
+      <input ng-model="form.population" required class="span12" placeholder="All of operations" />
 
-      <label>Description:</label>
-      <textarea ng-model="form.description" required class="span12" placeholder="please include steps to reproduce..."></textarea>
-
-      <label>Priority</label><br/>
+      <label>Priority</label>
       <select ng-model="form.priority" required class="span12">
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
       </select>
 
-        <label>Acceptance Critera</label>
-        <textarea ng-model="form.acceptance" required class="span12"></textarea>
+      <div ng-show="form.priority=='High'" class="alert">
+        <strong>Warning!</strong> Please call production support in addition to sending this form!
+      </div>
+
+      <label>Description:</label>
+      <textarea ng-model="form.description" required class="span12" placeholder="please include steps to reproduce..."></textarea>
+
+      <label>Acceptance Critera</label>
+      <textarea ng-model="form.acceptance" required class="span12"></textarea>
 
     <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
     <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>

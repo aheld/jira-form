@@ -47,3 +47,9 @@ ul.issues div.meta {padding-bottom:10px;}
 
 li.even {background-color: #eee;
 		}
+
+ul.issues div {
+	font-size: 16px;
+	padding-bottom:5px;
+	padding-top: 5px;
+}

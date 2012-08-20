@@ -2,11 +2,6 @@
 
 /* Services - be sure to include config.js*/
 
-angular.module('cache',[]).
-    factory('HttpCache',function($cacheFactory)
-    {
-           return $cacheFactory("jiracache");
-    });
 
 angular.module('jiraIssue', ['ngResource','configServices']).
    factory('Issue', function($resource,ConfigService){
@@ -16,7 +11,11 @@ angular.module('jiraIssue', ['ngResource','configServices']).
       prodissues: {method:'JSONP', isArray:false, params:{jql:'issuetype = "Production Issue" AND status != Canceled AND status != closed AND status != Staged AND status != "Resolved" and status !="QA Passed" AND status != "Deployed to Production" AND status != "Production Testing" and status != "Ready for Release" AND status != Complete AND status !="Acceptance Testing" AND status !="Pending PVT"  ORDER BY priority DESC, key DESC',"fields":"key,status,summary,assignee"}},
       issue:{method:'JSONP', isArray:false, params:{"type":"issue"}}
     });
-  });
+  }).
+  factory('HttpCache',function($cacheFactory)
+    {
+           return $cacheFactory("jiracache");
+    });
 
 angular.module('jiraSession',['ngResource','configServices']).
 	factory('JiraSession', function($resource,ConfigService){

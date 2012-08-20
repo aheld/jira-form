@@ -5,6 +5,7 @@
   function IssueFormCtrl($scope) {
 
     var master;
+
     $scope.cancel = function() {
       $scope.form = angular.copy(master);
     };
@@ -21,12 +22,16 @@
      
     $scope.isSaveDisabled = function() {
     	return $scope.prodForm.$invalid || angular.equals(master, $scope.form);
-    };
+    }
      
+    $scope.$watch("form.population",function(newvalue,oldvalue){
+      if (newvalue && newvalue>10000 && $scope.form.priority=='') $scope.form.priority = 'High';
+    });
+
     $scope.cancel();
     }
 
-
+ 
 function createJiraIssue(master){
   var jiraPost =  {
       "fields":{

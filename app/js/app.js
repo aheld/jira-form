@@ -2,7 +2,7 @@
 
 /* App Module */
 
-angular.module('issueapp', ['jiraSession','jiraIssue','cache' ]).
+angular.module('issueapp', ['jiraSession','jiraIssue' ]).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/issues/list/:query', {templateUrl: 'partials/issue-list.html',   controller: IssueListCtrl}).
