@@ -4,7 +4,7 @@
 
   function IssueFormCtrl($scope) {
 
-    var master = {};
+    var master;
     $scope.cancel = function() {
       $scope.form = angular.copy(master);
     };
@@ -17,7 +17,7 @@
      
     $scope.isCancelDisabled = function() {
   	  return angular.equals(master, $scope.form);
-    };
+    }
      
     $scope.isSaveDisabled = function() {
     	return $scope.prodForm.$invalid || angular.equals(master, $scope.form);
@@ -64,12 +64,14 @@ function IssueListCtrl($scope,Issue,$routeParams,HttpCache) {
   var data = {};
   if ($scope.jiraQuery == 'prodissues'){
         data = HttpCache.get("prodissues");
+        $scope.section_title="All open issues";
         if (!data) {
           data = Issue.prodissues();
           HttpCache.put("prodissues", data);
           }
         $scope.issues = data;
   } else {
+        $scope.section_title = "Open issues you reported";
         data = HttpCache.get("myissues");
         if (!data) {
           data = Issue.myissues();
@@ -82,3 +84,4 @@ function IssueListCtrl($scope,Issue,$routeParams,HttpCache) {
 function IssueDetailCtrl($scope, $routeParams, $http, ConfigService,Issue ) {
     $scope.issue = Issue.issue({issueID:$routeParams.issueID});
 }
+

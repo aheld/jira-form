@@ -1,29 +1,38 @@
- <div ng-controller="IssueFormCtrl">
-      <form id="prodform" name="prodForm">
-        <label>Reporter:</label>
-          <span class="reporter" ng-model="form.reporter">{{session.name}}</span> <br/><br/>
+<div ng-controller="IssueFormCtrl">
+  <div class="row-fluid">
+    <form id="prodform" name="prodForm" class="well span6">
+        <label>Reporter</label>
+        <span class="reporter" ng-model="form.reporter">{{session.name}}</span>
+        <br/><br/>
       <label>Summary:</label>
-          <input ng-model="form.summary" required /><br/>
+      <input ng-model="form.summary" required placeholder="Trouble saving account 123123" class="span12"/><br/>
 
       <label>Population Affected:</label>
-          <input ng-model="form.population" required /><br/>
+      <input ng-model="form.population" required class="span12" placeholder="All of operations" /><br/>
 
-        <label>Description:</label>
-          <textarea ng-model="form.description" required></textarea><br/>
-        <label>Priority</label><br/>
-          <select ng-model="form.priority" required>
+      <label>Description:</label>
+      <textarea ng-model="form.description" required class="span12" placeholder="please include steps to reproduce..."></textarea>
+
+      <label>Priority</label><br/>
+      <select ng-model="form.priority" required class="span12">
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
-          </select>
+      </select>
 
         <label>Acceptance Critera</label>
-        <textarea ng-model="form.acceptance" required></textarea>
+        <textarea ng-model="form.acceptance" required class="span12"></textarea>
 
     <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
     <button ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
     </form>
-    <hr/>
+    <div class="span6"> 
+        <p> <span class="label label-warning">
+            This form is not yet active
+        </span><br/>JIRA does not allow issue creation via JSON callback.  The plan is to connect a nodejs server to proxy this call.
+        </p>
+    </div>
+  </div>
       <div class="row-fluid">
         <div class="span5"> Form details
           <pre>{{form}}</pre>

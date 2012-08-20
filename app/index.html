@@ -3,31 +3,48 @@
 <head>
   <meta charset="utf-8">
   <title>We have issues</title>
-  <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-resource.min.js"></script>
+    <link rel="stylesheet" href="css/app.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-resource.min.js"></script>
+
+
   <script src="js/app.js"></script>  
   <script src="js/config.js"></script>
   <script src="js/services.js"></script>
-  <!--script src="js/filters.js"></script><!---->
   <script src="js/controllers.js"></script>
   
   
 </head>
-<body ng-controller="SessionCtrl">
-<div class="container-fluid">
-    <div class="row-fluid">
-    <div class="span2">
-      <!--Top Sidebar content-->
-    </div>
-      <div id="navrow" class="span10">
-  <A  href="#/issues/list/"> {{session.name}}'s' Issues</a> | 
-  <A href="#/issues/list/prodissues">All Open Issues</a> |
-  <A href="#/issues/new">New Issue</a>
+<body class="wehaveissues" ng-controller="SessionCtrl">
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Support Tickets</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li >
+                   <A  class="active" href="#/issues/list/"> {{session.name}}'s' Issues</a>
+              </li>
+              <li  class="divider-vertical"></li>
+              <li>
+                    <A href="#/issues/list/prodissues">All Open Issues</a>
+              </li>
+              <li  class="divider-vertical"></li>
+              <li>
+                    <A href="#/issues/new">New Issue</a>
+              </li>
+
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
       </div>
     </div>
 
+<div class="container-fluid">
   <div class="row-fluid">
     <div class="span2">
       <!--Sidebar content-->

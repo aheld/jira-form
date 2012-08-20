@@ -1,18 +1,49 @@
 /* app css stylesheet */
 
 body {
-  padding-top: 20px;
+  padding-top: 90px;
 }
 
-#navrow {
-  text-align:left;
-  font-size: 24px;
+
+span.reporter{font-weight: bold;}
+
+.wehaveissues .navbar .nav > li > a {
+	color:#fff;
 }
 
-label {
-  float:left;
+ul.issues{list-style: none;
+			padding:0;
+			margin:0;}
+ul.issues li {padding:5px;}
+ul.issues a.preview{
+	width:200px;
 }
 
-#prodform label {
-  float:none;
+ul.issues a.key{
+	width:200px;
 }
+
+ul.issues img {width:16px;}
+
+
+A.issue-key { width:120px;
+			font-size: 16px;
+			font-weight: bold;
+			display: block; float:left;
+			vertical-align: bottom;
+			}
+
+ span.status{ width:120px;
+			display: block; float:left;
+			vertical-align: bottom;
+			padding-left: 10px;
+			}
+
+ul.issues li a.preview {width:80px;
+			display: block; float:left;
+			vertical-align: bottom;}
+
+ul.issues div.meta {padding-bottom:10px;}
+
+li.even {background-color: #eee;
+		}
