@@ -4,10 +4,12 @@
    
       <pre>
         IssueCount: {{issues.issues.length}}
-        {{status_counts}}
+        Total  Pts: {{total_pts}}
+        Closed Pts: {{closed_pts}}
+        % closed  : {{(closed_pts)/total_pts}} 
+        {{data_array}}
         {{status_points}}
       </pre>
-      <button ng-click="process();create_chart()">run</button>
 
 <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 ​

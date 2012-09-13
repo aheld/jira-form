@@ -84,44 +84,57 @@ function IssueDetailCtrl($scope, $routeParams, $http, ConfigService,Issue ) {
 }
 
 function MetricsCtrl($scope,Issue){
-  $scope.issues = Issue.metrics({});
-  $scope.$watch('issues', $scope.process);
-  $scope.status_counts = {}
+  $scope.issues = Issue.metrics({},function(){
+      $scope.process();
+    });
+
+  $scope.status_counts = {};
   $scope.process = function(x,y){
-      console.log(this.issues);
-     var statuses = $.map(this.issues.issues,function(i){console.log(i);var z = i.fields.status.name; return [[z,1]];});
+     var statuses = $.map(this.issues.issues,function(i){
+                var z = i.fields.status.name;
+                return [[z,1]];
+              });
       var status_counts = {};
       var status_points = {};
-      console.log(statuses);
-      this.statuses = statuses;
       statuses = this.issues.issues;
       for (var i = statuses.length - 1; i >= 0; i--) {
-        console.log(statuses[i]);
         var statname = statuses[i].fields.status.name;
         status_counts[statname] = status_counts[statname] ? status_counts[statname] +1 :1;
         status_points[statname] = status_points[statname] ? status_points[statname] +1 : statuses[i].fields.customfield_10003;
-        console.log(statuses[i].key + " " + statuses[i].fields.customfield_10003)
-      };
+      }
+      var data_array = [];
+      $scope.total_pts = 0;
+      $scope.closed_pts = 0;
+      var closed_array = [];
+      $.each(status_points, function(i,n){
+        $scope.total_pts += n;
+        if (["QA","Pending QA Build","Task Complete","Closed","QA Passed","Ready for Release", "Complete", "Canceled"].indexOf(i) != -1) {
+          $scope.closed_pts += n;
+          closed_array.push({name:i, y:n, sliced: true});
+        }
+        else
+          data_array.push({name:i, y:n});
+      });
+      $.merge(data_array, closed_array);
       this.status_counts = status_counts;
-      this.status_points, = status_points;
+      this.status_points = status_points;
+      $scope.create_chart(data_array);
   };
 
 
-$scope.create_chart = function () {
+$scope.create_chart = function (data_array) {
         
         // Build the chart
-        chart = new Highcharts.Chart({
+         var chart = new Highcharts.Chart({
             chart: {
                 renderTo: 'container',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
                 plotShadow: false
             },
             title: {
-                text: 'Browser market shares at a specific website, 2010'
+                text: 'Points per Status'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                pointFormat: '{series.name}: <b>{point.y} => {point.percentage}%</b>',
                 percentageDecimals: 1
             },
             plotOptions: {
@@ -136,21 +149,8 @@ $scope.create_chart = function () {
             },
             series: [{
                 type: 'pie',
-                name: 'Browser share',
-                data: $scope.status_points,
-                dataaa: [
-                    ['Firefox',   45.0],
-                    ['IE',       26.8],
-                    {
-                        name: 'Chrome',
-                        y: 12.8,
-                        sliced: true,
-                        selected: true
-                    },
-                    ['Safari',    8.5],
-                    ['Opera',     6.2],
-                    ['Others',   0.7]
-                ]
+                name: 'Statuses',
+                data: data_array,
             }]
         });
     }
