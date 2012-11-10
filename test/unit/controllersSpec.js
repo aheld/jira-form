@@ -17,19 +17,19 @@ describe('IssueApp controllers', function() {
 
     beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('phones/my-issues.json').
+      $httpBackend.expectGET('https://energyplus.atlassian.net/rest/api/2/issue/INBOUND-20').
           respond([{name: 'INBOUND-20'}, {name: 'HTTPS required'}]);
 
       scope = $rootScope.$new();
-      ctrl = $controller(PhoneListCtrl, {$scope: scope});
+      ctrl = $controller(IssueListCtrl, {$scope: scope});
     }));
 
 
     it('should list INBOUND-20', function() {
-      expect(scope.phones).toEqual([]);
+      expect(scope.issues).toEqual([]);
       $httpBackend.flush();
 
-      expect(scope.phones).toEqualData(
+      expect(scope.issues).toEqualData(
           [{name: 'INBOUND-20'}, {name: 'HTTPS required'}]);
     });
 
